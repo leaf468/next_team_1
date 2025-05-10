@@ -1,0 +1,920 @@
+:root {
+    --primary-color: #5271ff;
+    --secondary-color: #ff5757;
+    --text-color: #333333;
+    --background-color: #f9f9f9;
+    --card-background: #ffffff;
+    --border-color: #e0e0e0;
+    --success-color: #4caf50;
+    --warning-color: #ff9800;
+    --error-color: #f44336;
+    --header-height: 60px;
+    --footer-height: 80px;
+
+    /* Responsive breakpoints */
+    --breakpoint-sm: 576px;
+    --breakpoint-md: 768px;
+    --breakpoint-lg: 992px;
+    --breakpoint-xl: 1200px;
+
+    /* Spacing */
+    --spacing-xs: 5px;
+    --spacing-sm: 10px;
+    --spacing-md: 15px;
+    --spacing-lg: 20px;
+    --spacing-xl: 30px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Noto Sans KR", sans-serif;
+    color: var(--text-color);
+    background-color: var(--background-color);
+    line-height: 1.6;
+    font-size: 16px;
+    overflow-x: hidden;
+    width: 100%;
+    min-height: 100vh;
+}
+
+/* Font size responsive adjustments */
+@media (max-width: 576px) {
+    body {
+        font-size: 14px;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    h3 {
+        font-size: 1.2rem;
+    }
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    background: none;
+    font-family: inherit;
+}
+
+.app {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+.main-content {
+    padding: var(--spacing-xl);
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    flex: 1;
+    padding-top: calc(var(--header-height) + var(--spacing-xl));
+    padding-bottom: var(--spacing-xl);
+}
+
+@media (max-width: 576px) {
+    .main-content {
+        padding: var(--spacing-sm);
+        padding-top: calc(var(--header-height) + var(--spacing-sm));
+        padding-bottom: var(--spacing-sm);
+    }
+}
+
+/* 헤더 스타일 */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: white;
+    height: var(--header-height);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    padding: 0 var(--spacing-lg);
+    z-index: 1000;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.navbar-content {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.nav-links {
+    display: flex;
+    gap: var(--spacing-lg);
+}
+
+.nav-link {
+    color: var(--text-color);
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: var(--primary-color);
+}
+
+.notification-button {
+    position: relative;
+}
+
+.notification-badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background-color: var(--secondary-color);
+    color: white;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    font-size: 0.7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Mobile navbar */
+.mobile-menu-toggle {
+    display: none;
+    font-size: 1.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: var(--spacing-xs);
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        padding: 0 var(--spacing-sm);
+    }
+
+    .logo {
+        font-size: 1.3rem;
+    }
+
+    .mobile-menu-toggle {
+        display: block;
+    }
+
+    .nav-links {
+        position: fixed;
+        top: var(--header-height);
+        left: 0;
+        right: 0;
+        background-color: white;
+        flex-direction: column;
+        padding: var(--spacing-md);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transform: translateY(-100%);
+        opacity: 0;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+        pointer-events: none;
+        z-index: 900;
+    }
+
+    .nav-links.open {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: all;
+    }
+
+    .nav-link {
+        padding: var(--spacing-sm) 0;
+        width: 100%;
+        text-align: center;
+    }
+}
+
+/* 푸터 스타일 */
+.footer {
+    background-color: white;
+    padding: var(--spacing-lg);
+    border-top: 1px solid var(--border-color);
+    min-height: var(--footer-height);
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: var(--spacing-xl);
+}
+
+.footer-section {
+    flex: 1;
+    min-width: 250px;
+    padding: var(--spacing-md);
+}
+
+.footer-title {
+    margin-bottom: var(--spacing-md);
+    color: var(--primary-color);
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links li {
+    margin-bottom: var(--spacing-sm);
+}
+
+.footer-bottom {
+    margin-top: var(--spacing-xl);
+    text-align: center;
+    padding-top: var(--spacing-md);
+    border-top: 1px solid var(--border-color);
+}
+
+@media (max-width: 768px) {
+    .footer {
+        padding: var(--spacing-md);
+    }
+
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-section {
+        width: 100%;
+        padding: var(--spacing-sm);
+        margin-bottom: var(--spacing-md);
+    }
+}
+
+/* 검색 영역 스타일 */
+.search-container {
+    margin: var(--spacing-lg) 0;
+}
+
+.search-bar {
+    display: flex;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.search-input {
+    flex: 1;
+    padding: 12px 16px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px 0 0 8px;
+    font-size: 1rem;
+}
+
+.search-button {
+    padding: 12px 20px;
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 0 8px 8px 0;
+    font-weight: 500;
+}
+
+@media (max-width: 576px) {
+    .search-container {
+        margin: var(--spacing-md) 0;
+    }
+
+    .search-bar {
+        max-width: 100%;
+    }
+
+    .search-input {
+        padding: 10px 12px;
+        font-size: 0.9rem;
+    }
+
+    .search-button {
+        padding: 10px 15px;
+        font-size: 0.9rem;
+    }
+}
+
+/* 필터 영역 스타일 */
+.filter-section {
+    margin: var(--spacing-lg) 0;
+    padding: var(--spacing-md);
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.filter-row {
+    display: flex;
+    gap: var(--spacing-md);
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.filter-item {
+    flex: 1;
+    min-width: 200px;
+}
+
+.filter-label {
+    display: block;
+    margin-bottom: var(--spacing-xs);
+    font-weight: 500;
+}
+
+.filter-input {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+}
+
+.filter-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-md);
+}
+
+.clear-button {
+    padding: 8px 16px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: white;
+}
+
+.apply-button {
+    padding: 8px 16px;
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 4px;
+}
+
+@media (max-width: 768px) {
+    .filter-section {
+        padding: var(--spacing-sm);
+    }
+
+    .filter-row {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+
+    .filter-item {
+        width: 100%;
+        min-width: initial;
+    }
+
+    .filter-buttons {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .clear-button,
+    .apply-button {
+        flex: 1;
+        text-align: center;
+        padding: 8px 0;
+    }
+}
+
+/* 카드 스타일 */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--spacing-lg);
+    margin-top: var(--spacing-lg);
+}
+
+.festival-card {
+    background-color: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s, box-shadow 0.2s;
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--border-color);
+}
+
+.festival-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.festival-image {
+    height: 180px;
+    background-color: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.festival-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.placeholder-image {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #e0e0e0;
+    font-size: 3rem;
+    font-weight: 700;
+    color: white;
+}
+
+@media (max-width: 992px) {
+    .card-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: var(--spacing-md);
+    }
+}
+
+@media (max-width: 576px) {
+    .card-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-sm);
+    }
+
+    .festival-image {
+        height: 160px;
+    }
+}
+
+.festival-content {
+    padding: var(--spacing-md);
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.festival-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.festival-name {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: var(--spacing-xs);
+    word-break: break-word;
+}
+
+.festival-school {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: var(--spacing-sm);
+}
+
+@media (max-width: 576px) {
+    .festival-content {
+        padding: var(--spacing-sm);
+    }
+
+    .festival-name {
+        font-size: 1.1rem;
+    }
+}
+
+.festival-details {
+    margin-top: 10px;
+}
+
+.festival-detail {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+}
+
+.festival-detail .icon {
+    margin-right: 8px;
+    color: var(--primary-color);
+}
+
+.favorite-button {
+    font-size: 1.2rem;
+    color: #ccc;
+    transition: color 0.2s;
+}
+
+.favorite-button:hover,
+.favorite-button.active {
+    color: var(--secondary-color);
+}
+
+.festival-artists {
+    margin-top: 10px;
+    font-size: 0.85rem;
+}
+
+.artists-label {
+    font-weight: 500;
+    margin-right: 5px;
+}
+
+.artists-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.artist-tag {
+    background-color: #f0f0f0;
+    padding: 2px 8px;
+    border-radius: 12px;
+}
+
+.more-artists {
+    color: #666;
+    font-size: 0.8rem;
+}
+
+.festival-status {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    z-index: 10;
+    color: white;
+}
+
+.festival-status.upcoming {
+    background-color: var(--primary-color);
+}
+
+.festival-status.ongoing {
+    background-color: var(--success-color);
+}
+
+.festival-status.ended {
+    background-color: #999;
+}
+
+/* 상세 페이지 스타일 */
+.festival-detail-page {
+    background-color: white;
+    border-radius: 8px;
+    padding: var(--spacing-lg);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.festival-detail-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: var(--spacing-lg);
+    flex-wrap: wrap;
+    gap: var(--spacing-md);
+}
+
+.festival-detail-name {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: var(--spacing-xs);
+    word-break: break-word;
+}
+
+.festival-detail-school {
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: var(--spacing-md);
+}
+
+.festival-detail-actions {
+    display: flex;
+    gap: var(--spacing-sm);
+    flex-wrap: wrap;
+}
+
+.action-button {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 8px 15px;
+    border-radius: 4px;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.favorite-action {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.share-action {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.festival-detail-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+}
+
+@media (max-width: 768px) {
+    .festival-detail-page {
+        padding: var(--spacing-md);
+    }
+
+    .festival-detail-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-sm);
+    }
+
+    .festival-detail-name {
+        font-size: 1.6rem;
+    }
+
+    .festival-detail-school {
+        font-size: 1rem;
+        margin-bottom: var(--spacing-sm);
+    }
+
+    .festival-detail-actions {
+        width: 100%;
+    }
+
+    .action-button {
+        flex: 1;
+        justify-content: center;
+    }
+
+    .festival-detail-info {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-md);
+    }
+}
+
+@media (max-width: 576px) {
+    .festival-detail-page {
+        padding: var(--spacing-sm);
+    }
+
+    .festival-detail-name {
+        font-size: 1.4rem;
+    }
+
+    .festival-detail-info {
+        gap: var(--spacing-sm);
+    }
+}
+
+.info-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.info-item h3 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+}
+
+.info-item .icon {
+    color: var(--primary-color);
+}
+
+.festival-detail-section {
+    margin-bottom: 30px;
+}
+
+.section-title {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.section-title .icon {
+    margin-right: 10px;
+    color: var(--primary-color);
+}
+
+.artists-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.artist-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    transition: transform 0.2s;
+}
+
+.artist-item:hover {
+    transform: translateY(-5px);
+}
+
+.artist-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.artist-name {
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+.artist-time {
+    font-size: 0.85rem;
+    color: #666;
+}
+
+.festival-description {
+    line-height: 1.7;
+}
+
+.ticket-info {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+}
+
+.ticket-link {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 8px 20px;
+    background-color: var(--success-color);
+    color: white;
+    border-radius: 4px;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+
+.ticket-link:hover {
+    background-color: #3d8b40;
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    color: var(--primary-color);
+    font-weight: 500;
+}
+
+/* 알림 스타일 */
+.notification-container,
+.notification-dropdown {
+    position: fixed;
+    top: calc(var(--header-height) + 5px);
+    right: 20px;
+    width: 320px;
+    max-width: calc(100vw - 40px);
+    z-index: 1000;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    max-height: calc(100vh - var(--header-height) - 20px);
+    overflow-y: auto;
+    border: 1px solid var(--border-color);
+    padding: var(--spacing-sm);
+}
+
+.notification {
+    background-color: white;
+    padding: var(--spacing-md);
+    margin-bottom: var(--spacing-sm);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    animation: slideIn 0.3s ease-out;
+    width: 100%;
+}
+
+.notification-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-xs);
+}
+
+.notification-title {
+    font-weight: 500;
+}
+
+.notification-close {
+    font-size: 1.2rem;
+    color: #999;
+    cursor: pointer;
+    padding: 0 var(--spacing-xs);
+}
+
+.notification-message {
+    font-size: 0.9rem;
+    word-break: break-word;
+}
+
+.notification-time {
+    margin-top: var(--spacing-xs);
+    font-size: 0.8rem;
+    color: #999;
+    text-align: right;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@media (max-width: 576px) {
+    .notification-container {
+        right: 5px;
+        left: 5px;
+        width: auto;
+    }
+
+    .notification {
+        padding: var(--spacing-sm);
+    }
+}
+
+/* 반응형 스타일 */
+@media (max-width: 768px) {
+    .card-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+
+    .festival-detail-header {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .filter-row {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .filter-item {
+        width: 100%;
+    }
+
+    .main-content {
+        padding: 15px;
+        padding-top: calc(var(--header-height) + 15px);
+    }
+}
